@@ -51,3 +51,33 @@ int main(int argc, char **argv)
 	//tabla virtual MySQL
 	
 	resultado = mysql_store_result (conn);
+	//Recogemos el resultado de la primera fila
+	
+	row = mysql_fetch_row (resultado);
+	//Analizamos para empezar la primera fila para saber
+	//si hemos obtenido resultados con la consulta
+	
+	if (row == NULL)
+		printf ("No se han obtenido datos en la consulta\n");
+	
+	//En caso de obtener resultados, se analiza cada fila hasta llegar
+	//a la primera fila con un valor nulo
+	
+	else
+		
+		while (row !=NULL) {
+			
+			//Mientras la fila no sea nula se sumara una Partida Ganada
+			PartidasGanadas++;
+			//Obtenemos la siguiente fila para el siguiente loop
+			row = mysql_fetch_row (resultado);
+	}
+		
+		//Cerrar la conexion con el servidor MySQL 
+		mysql_close (conn);
+		//Imprimimos en pantalla el resultado deseado,
+		//aunque esto se puede modificar para que solamente
+		printf("%d\n",PartidasGanadas);
+		
+		exit(0);
+}
